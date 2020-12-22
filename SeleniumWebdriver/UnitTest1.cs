@@ -11,34 +11,6 @@ using System.Threading;
 
 namespace SeleniumWebdriver
 {
-    public class BrowserFactory
-    {
-        private static IWebDriver driver;
-
-        public static IWebDriver Driver(string browserName)
-        {
-            if(driver == null)
-            {
-                switch (browserName)
-                {
-                    case "Chrome":
-                        driver = new ChromeDriver();
-                        return driver;
-
-                    case "FireFox":
-                        driver = new FirefoxDriver();
-                        return driver;
-
-                    case "IE":
-                        driver = new InternetExplorerDriver();
-                        return driver;
-                }
-            }
-
-            return null;
-        }
-    }
-
     public class Tests
     {
         [SetUp]
@@ -47,26 +19,26 @@ namespace SeleniumWebdriver
 
         }
 
-        public void ActionOnBBC(IWebDriver browser)
+        public void ActionOnBBC(IWebDriver driver)
         {
-            browser.Url = "https://www.google.com.ua/";
+            driver.Url = "https://www.google.com.ua/";
 
-            browser.FindElement(By.Name("q")).SendKeys("www.bbc.com" + Keys.Enter);
+            driver.FindElement(By.Name("q")).SendKeys("www.bbc.com" + Keys.Enter);
             Thread.Sleep(2000);
 
-            var buttonBBC = browser.FindElement(By.CssSelector(".LC20lb.DKV0Md"));
+            var buttonBBC = driver.FindElement(By.CssSelector(".LC20lb.DKV0Md"));
             buttonBBC.Click();
 
-            var buttonMaybeLater = browser.FindElement(By.ClassName("sign_in-exit"));
+            var buttonMaybeLater = driver.FindElement(By.ClassName("sign_in-exit"));
             buttonMaybeLater.Click();
 
-            var search = browser.FindElement(By.Id("orb-search-q"));
+            var search = driver.FindElement(By.Id("orb-search-q"));
             search.SendKeys("Travels" + Keys.Enter);
 
-            var firstLink = browser.FindElement(By.CssSelector(".css-vh7bxp-PromoLink.e1f5wbog6"));
+            var firstLink = driver.FindElement(By.CssSelector(".css-vh7bxp-PromoLink.e1f5wbog6"));
             firstLink.Click();
 
-            browser.Quit();
+            driver.Quit();
         }
 
         [Ignore("Тест успішний")]
@@ -77,12 +49,34 @@ namespace SeleniumWebdriver
             ActionOnBBC(BrowserFactory.Driver("Chrome"));
         }
 
-        //[Ignore("Не вводить текст у поле")]
+        [Ignore("Не вводить текст у поле")]
         [Test]
         [Obsolete]
         public void Browser_IE()
         {
-            ActionOnBBC(BrowserFactory.Driver("IE"));
+            //цей код необхідний для того щоб тест запустився в IE
+            InternetExplorerOptions options = new InternetExplorerOptions();
+            options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+            var driver = new InternetExplorerDriver(options);
+
+            driver.Url = "https://www.google.com.ua/";
+
+            driver.FindElement(By.Name("q")).SendKeys("www.bbc.com" + Keys.Enter);
+            Thread.Sleep(2000);
+
+            var buttonBBC = driver.FindElement(By.CssSelector(".LC20lb.DKV0Md"));
+            buttonBBC.Click();
+
+            var buttonMaybeLater = driver.FindElement(By.ClassName("sign_in-exit"));
+            buttonMaybeLater.Click();
+
+            var search = driver.FindElement(By.Id("orb-search-q"));
+            search.SendKeys("Travels" + Keys.Enter);
+
+            var firstLink = driver.FindElement(By.CssSelector(".css-vh7bxp-PromoLink.e1f5wbog6"));
+            firstLink.Click();
+
+            driver.Quit();
         }
 
         [Ignore("Тест успішний")]
@@ -91,6 +85,15 @@ namespace SeleniumWebdriver
         public void Browser_FireFox()
         {
             ActionOnBBC(BrowserFactory.Driver("FireFox"));
+        }
+
+        [Test]
+        [Obsolete]
+        public void Test4()
+        {
+            PageEelements pageEelements = new PageEelements(BrowserFactory.Driver("Chrome"));
+            pageEelements.Navigate();
+            pageEelements.Search("www.bbc.com");
         }
     }
 }

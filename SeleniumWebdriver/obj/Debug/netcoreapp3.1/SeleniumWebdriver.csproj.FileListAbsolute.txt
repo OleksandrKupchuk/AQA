@@ -94,5 +94,9 @@ D:\GitProject\AQA\SeleniumWebdriver\bin\Debug\netcoreapp3.1\SeleniumWebdriver.pd
 D:\GitProject\AQA\SeleniumWebdriver\bin\Debug\netcoreapp3.1\WebDriver.dll
 D:\GitProject\AQA\SeleniumWebdriver\obj\Debug\netcoreapp3.1\SeleniumWebdriver.dll
 D:\GitProject\AQA\SeleniumWebdriver\obj\Debug\netcoreapp3.1\SeleniumWebdriver.pdb
+D:\GitProject\AQA\SeleniumWebdriver\bin\Debug\netcoreapp3.1\SeleniumExtras.PageObjects.dll
+D:\GitProject\AQA\SeleniumWebdriver\bin\Debug\netcoreapp3.1\SeleniumExtras.WaitHelpers.dll
+D:\GitProject\AQA\SeleniumWebdriver\bin\Debug\netcoreapp3.1\SeleniumExtras.PageObjects.Linq.dll
+D:\GitProject\AQA\SeleniumWebdriver\bin\Debug\netcoreapp3.1\Selenium.Community.PageObjects.dll
 D:\GitProject\AQA\SeleniumWebdriver\bin\Debug\netcoreapp3.1\WebDriver.Support.dll
 D:\GitProject\AQA\SeleniumWebdriver\obj\Debug\netcoreapp3.1\SeleniumWebdriver.csproj.CoreCompileInputs.cache
